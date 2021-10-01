@@ -3,7 +3,7 @@ const screens = "Simple, Complex, Interactive";
 const screenPrice = 25;
 const rollback = 97;
 const fullPrice = 5000000;
-const adaptive = true;
+const Adaptive = true;
 
 console.log(
   "title: " +
