@@ -1,21 +1,22 @@
+"use strict";
+
 const title = prompt("Как называется ваш проект?");
 const screens = prompt(
   "Какие типы экранов нужно разработать?(прим.:Простые, Сложные, Интерактивные)"
 );
-const screenPrice = prompt("Сколько будет стоить данная работа?");
-let rollback = 97;
-let fullPrice;
-const adaptive = prompt("Нужен ли адаптив на сайте?");
+const screenPrice = +prompt("Сколько будет стоить данная работа?");
+const rollback = 97;
+const adaptive = confirm("Нужен ли адаптив на сайте?");
 
 const service1 = prompt("Какой дополнительный тип услуги нужен?");
-const servicePrice1 = prompt("Сколько это будет стоить?");
+const servicePrice1 = +prompt("Сколько это будет стоить?");
 
 const service2 = prompt("Какой дополнительный тип услуги нужен?");
-const servicePrice2 = prompt("Сколько это будет стоить?");
+const servicePrice2 = +prompt("Сколько это будет стоить?");
 
-fullPrice = Number(screenPrice) + Number(servicePrice1) + Number(servicePrice2);
+const fullPrice = screenPrice + servicePrice1 + servicePrice2;
 
-let servicePercentPrice = Math.ceil(fullPrice - rollback);
+const servicePercentPrice = Math.ceil(fullPrice - rollback);
 
 if (fullPrice < 0) {
   console.log("Что-то пошло не так");
