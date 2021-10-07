@@ -10,8 +10,14 @@ const rollback = 10;
 let service1;
 let service2;
 
+const isNull = function (num) {
+  if (num !== null) {
+    return false;
+  } else return true;
+};
+
 const isNumber = function (num) {
-  return !isNaN(parseFloat(num)) && isFinite(num);
+  return !isNaN(parseFloat(num)) && isFinite(num) && !isNull(num);
 };
 
 const asking = function () {
@@ -31,15 +37,18 @@ const asking = function () {
 const getAllServicePrices = function () {
   let sum = 0;
 
+
   for (let i = 0; i < 2; i++) {
     if (i === 0) {
       service1 = prompt("Какой дополнительный тип услуги нужен?", "Админка");
     } else if (i === 1) {
       service2 = prompt("Какой дополнительный тип услуги нужен?", "Аналитика");
     }
-    do {
-      sum += +prompt("Сколько это будет стоить?");
-    } while (!isNumber(sum))
+    let price = null;
+    while (!isNumber(price)){
+      price = prompt("Сколько это будет стоить?");
+      sum+=Number(price);
+    }
   }
 
   return sum;
