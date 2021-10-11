@@ -22,7 +22,6 @@ const appData = {
     appData.getFullPrice();
     appData.getServicePercentPrices();
     appData.getTitle();
-    appData.getRollbackMessage();
     
     appData.logger();
   },
@@ -31,6 +30,7 @@ const appData = {
       appData.title = prompt("Как называется ваш проект?");
     } while (!isString(appData.title))
   
+    for (let i = 0; i < 2; i++) {
       let name;
       do {
         name = prompt(
@@ -44,7 +44,8 @@ const appData = {
         price = +prompt("Сколько будет стоить данная работа?");
       } while (!isNumber(price));
 
-      appData.screens.push({name: name, price: price});
+      appData.screens.push({id: i, name: name, price: price});
+    }
 
 
     for (let i = 0; i < 2; i++) {
