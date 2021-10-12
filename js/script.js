@@ -1,5 +1,37 @@
 "use strict";
 
+const title = document.getElementsByTagName("h1")[0].outerText;
+console.log(title);
+const btns = document.getElementsByClassName("handler_btn");
+
+Array.from(btns).forEach((el) => console.log(el));
+
+const screenBtn = document.querySelector(".screen-btn");
+console.log(screenBtn);
+
+const otherItemsPercent = document.querySelectorAll(".other-items.percent");
+console.log(otherItemsPercent);
+
+const otherItemsNumber = document.querySelectorAll(".other-items.number");
+console.log(otherItemsNumber);
+
+const inputRange = document.querySelector(".rollback input[type=range]");
+console.log(inputRange);
+
+const rangeValue = document.querySelector(".rollback span.range-value");
+console.log(rangeValue);
+
+const allInputs = document.getElementsByClassName("total-input");
+
+console.log("allInputs");
+console.log(allInputs.length);
+for (let i = 0; i < allInputs.length; i++){
+  console.log(allInputs[i]);
+}
+
+let screenBlocks = document.querySelectorAll(".screen");
+console.log(screenBlocks);
+
 const isNumber = function (num) {
   return !isNaN(parseFloat(num)) && isFinite(num);
 };
@@ -110,4 +142,4 @@ const appData = {
   },
 };
 
-appData.start();
+// appData.start();
