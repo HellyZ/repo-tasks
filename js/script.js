@@ -1,7 +1,6 @@
 "use strict";
 
 const title = document.getElementsByTagName("h1")[0];
-// Array.from(btns).forEach((el) => console.log(el));
 
 const buttonPlus = document.querySelector(".screen-btn");
 const otherItemsPercent = document.querySelectorAll(".other-items.percent");
@@ -82,6 +81,13 @@ const appData = {
     screens[screens.length - 1].after(cloneScreen);
   },
   start: function () {
+    let screens = appData.getScreens();
+    if (
+      !screens[0].querySelector("select").value ||
+      !screens[0].querySelector("input").value
+    ) {
+      return;
+    }
     appData.addScreens();
     appData.screenCount();
     appData.addServices();
@@ -89,8 +95,6 @@ const appData = {
     appData.showResult();
 
     // appData.logger();
-
-    console.log(appData);
   },
   showResult: function () {
     total.value = appData.screenPrice;
@@ -102,22 +106,10 @@ const appData = {
   addScreens: function () {
     screens = document.querySelectorAll(".screen");
     screens.forEach(function (screen, index) {
-      const unlock = 0;
       const select = screen.querySelector("select");
       const input = screen.querySelector("input");
       const selectName = select.options[select.selectedIndex].textContent;
-      select.addEventListener("change", function (event) {
-        unlock++;
-        console.log(`${event.target.value}`);
-        console.log(`event.target.parentNode: ${event.target.parentNode}`);
-      });
-      input.addEventListener("change", function (event) {
-        unlock++;
-        console.log(`${event.target.value}`);
-        console.log(`event.currentTarget: ${event.currentTarget}`);
-      });
-      console.log(`select: ${select}, input: ${input}`);
-      console.log(`blockButton:false ${appData.screens}`);
+
       appData.screens.push({
         id: index,
         name: selectName,
@@ -125,11 +117,9 @@ const appData = {
         number: +input.value,
       });
     });
-    console.log(appData.screens);
   },
   screenCount: function () {
     for (let screen of appData.screens) {
-      console.log(`screen.number ${screen.number}`);
       appData.screenCountValue += +screen.number;
     }
   },
@@ -154,7 +144,7 @@ const appData = {
     totalCountRollback.value = appData.servicePercentPrice;
   },
   getScreens: function () {
-    return appData.screens.split(", ");
+    return document.querySelectorAll(".screen");
   },
 
   logger: function () {
