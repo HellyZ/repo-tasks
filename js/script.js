@@ -97,8 +97,8 @@ const appData = {
     appData.clear();
     // appData.logger();
   },
-  clear: function(){
-    console.log("clear")
+  clear: function () {
+    console.log("clear");
     appData.screenPrice = 0;
     appData.screenCountValue = 0;
     appData.servicePricesPercent = 0;
@@ -106,6 +106,8 @@ const appData = {
     appData.fullPrice = 0;
     appData.inputRangeValue = 0;
     appData.screens.length = 0;
+    appData.otherItemsNumber.length = 0;
+    appData.otherItemsPercent.length = 0;
   },
   showResult: function () {
     total.value = appData.screenPrice;
@@ -120,13 +122,24 @@ const appData = {
       const select = screen.querySelector("select");
       const input = screen.querySelector("input");
       const selectName = select.options[select.selectedIndex].textContent;
-
-      appData.screens.push({
-        id: index,
-        name: selectName,
-        price: +select.value * +input.value,
-        number: +input.value,
-      });
+      if (
+        !screens[index].querySelector("select").value ||
+        !screens[index].querySelector("input").value
+      ) {
+        console.log("поля не заполнены");
+        appData.clear();
+        appData.screens = [];
+        return;
+      } else {
+        console.log("все поля заполнены");
+        appData.screens.push({
+          id: index,
+          name: selectName,
+          price: +select.value * +input.value,
+          number: +input.value,
+        });
+      }
+      
     });
   },
   screenCount: function () {
