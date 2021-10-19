@@ -45,7 +45,7 @@ const appData = {
     });
   },
 
-  blockButton: function (n) {
+  blockButton: function () {
     startBtn.disabled = n;
     startBtn.style.backgroundColor = "gray";
     startBtn.style.cursor = "not-allowed";
@@ -94,7 +94,18 @@ const appData = {
     appData.addPrices();
     appData.showResult();
 
+    appData.clear();
     // appData.logger();
+  },
+  clear: function(){
+    console.log("clear")
+    appData.screenPrice = 0;
+    appData.screenCountValue = 0;
+    appData.servicePricesPercent = 0;
+    appData.servicePricesNumber = 0;
+    appData.fullPrice = 0;
+    appData.inputRangeValue = 0;
+    appData.screens.length = 0;
   },
   showResult: function () {
     total.value = appData.screenPrice;
