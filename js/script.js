@@ -43,7 +43,6 @@ const appData = {
     allSelects = document.querySelectorAll("[name=views-select]");
     allInputs.forEach((item) => {
       item.setAttribute("disabled", "disabled");
-      // .removeAttribute("disabled");
     });
     checkboxes.forEach((item) => {
       item.setAttribute("disabled", "disabled");
@@ -58,8 +57,6 @@ const appData = {
   },
 
   resetUI: function (e) {
-    console.log("resetUI");
-    console.log(this);
     this.screens = [];
 
     allInputs.forEach((item) => {
@@ -76,14 +73,10 @@ const appData = {
     inputRangeValue.textContent = "0%";
     startBtn.style.display = "block";
     resetBtn.style.display = "none";
-
-    // this.init();
   },
   initRollback: function (e) {
     inputRangeValue.textContent = `${e.target.value}%`;
     this.rollback = e.target.value;
-    console.log("init");
-    console.log(this);
   },
   init: function () {
     this.addTitle();
@@ -123,14 +116,11 @@ const appData = {
     otherItemsNumber.forEach((item) => this.otherItemsNumberCheck(item));
   },
   addScreenBlock: function () {
-    console.log("addScreenBlock");
     const cloneScreen = screens[0].cloneNode(true);
     cloneScreen.classList.add("custom");
     screens[screens.length - 1].after(cloneScreen);
   },
   start: function (e) {
-    console.log("start");
-    console.log(this);
     let screens = this.getScreens();
     if (
       !screens[0].querySelector("select").value ||
@@ -146,8 +136,6 @@ const appData = {
     this.reset();
   },
   clear: function () {
-    console.log("clear");
-    console.log(this);
     this.screenPrice = 0;
     this.screenCountValue = 0;
     this.servicePricesPercent = 0;
@@ -157,9 +145,6 @@ const appData = {
     this.servicePercentPrice = 0;
     this.screens.length = 0;
 
-    // allInputs.slice(-7).forEach((item) => {
-    //   item.value = "";
-    // });
     checkboxes.forEach((item) => {
       item.checked = false;
     });
@@ -178,8 +163,6 @@ const appData = {
       });
   },
   showResult: function () {
-    console.log("showResult");
-    console.log(this);
     total.value = this.screenPrice;
     totalCount.value = +this.screenCountValue;
     totalCountOther.value =
@@ -197,12 +180,11 @@ const appData = {
         !screens[index].querySelector("input").value
       ) {
         console.log("поля не заполнены");
-        this.clear(appData);
+        this.clear(this);
         this.screens = [];
         return;
       } else {
         console.log("все поля заполнены");
-        console.log(this);
         appData.screens.push({
           id: index,
           name: selectName,
@@ -214,15 +196,11 @@ const appData = {
   },
   addScreensWork: function () {},
   screenCount: function () {
-    console.log("screenCount");
-    console.log(this);
     for (let screen of this.screens) {
       this.screenCountValue += +screen.number;
     }
   },
   addPrices: function () {
-    console.log("addPrices");
-    console.log(this);
     for (let screen of this.screens) {
       this.screenPrice += +screen.price;
     }
