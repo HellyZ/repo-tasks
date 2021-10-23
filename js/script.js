@@ -179,12 +179,10 @@ const appData = {
       !screens[index].querySelector("input").value
     ) {
       console.log("поля не заполнены");
-      console.log(this);
       this.clear(this);
       this.screens = [];
       return;
     } else {
-      console.log("все поля заполнены");
       this.screens.push({
         id: index,
         name: selectName,
