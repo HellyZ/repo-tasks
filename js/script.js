@@ -169,32 +169,36 @@ const appData = {
       this.servicePricesPercent + this.servicePricesNumber;
     fullTotalCount.value = this.fullPrice;
   },
+
+  processScreen: function (screen, index) {
+    const select = screen.querySelector("select");
+    const input = screen.querySelector("input");
+    const selectName = select.options[select.selectedIndex].textContent;
+    if (
+      !screens[index].querySelector("select").value ||
+      !screens[index].querySelector("input").value
+    ) {
+      console.log("поля не заполнены");
+      console.log(this);
+      this.clear(this);
+      this.screens = [];
+      return;
+    } else {
+      console.log("все поля заполнены");
+      this.screens.push({
+        id: index,
+        name: selectName,
+        price: +select.value * +input.value,
+        number: +input.value,
+      });
+    }
+  },
+
   addScreens: function () {
     screens = document.querySelectorAll(".screen");
-    screens.forEach(function (screen, index) {
-      const select = screen.querySelector("select");
-      const input = screen.querySelector("input");
-      const selectName = select.options[select.selectedIndex].textContent;
-      if (
-        !screens[index].querySelector("select").value ||
-        !screens[index].querySelector("input").value
-      ) {
-        console.log("поля не заполнены");
-        this.clear(this);
-        this.screens = [];
-        return;
-      } else {
-        console.log("все поля заполнены");
-        appData.screens.push({
-          id: index,
-          name: selectName,
-          price: +select.value * +input.value,
-          number: +input.value,
-        });
-      }
-    });
+    screens.forEach((screen, index) => this.processScreen(screen, index));
   },
-  addScreensWork: function () {},
+
   screenCount: function () {
     for (let screen of this.screens) {
       this.screenCountValue += +screen.number;
